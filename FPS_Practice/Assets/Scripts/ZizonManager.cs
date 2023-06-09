@@ -5,9 +5,10 @@ using Quaternion = System.Numerics.Quaternion;
 
 public class ZizonManager : MonoBehaviour
 {
+    public GameObject zizon;
+    
     public float zizonCreateRate;
     private float currentTime;
-    public GameObject zizon;
     public float createPosRange;
 
     void Update()

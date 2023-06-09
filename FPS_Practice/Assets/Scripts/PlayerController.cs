@@ -4,19 +4,23 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public GameObject cam;
+    public GameObject gui;
+    
+    private Rigidbody rb;
+    
+    private Vector3 ThirdPersonCamOffset;
+    private Vector3 OnePersonCamOffset;
+    
     public static bool isGround;
     private bool isOnePerson;
-    public GameObject cam;
 
     public float speed;
 
-    private Rigidbody rb;
     private float xInput;
     private float zInput;
 
     private float yRotation;
-    private Vector3 ThirdPersonCamOffset;
-    private Vector3 OnePersonCamOffset;
     
     
     void Start()
@@ -59,10 +63,12 @@ public class PlayerController : MonoBehaviour
             if (isOnePerson)
             {
                 cam.transform.localPosition = ThirdPersonCamOffset;
+                gui.SetActive(false);
             }
             else
             {
                 cam.transform.localPosition = OnePersonCamOffset;
+                gui.SetActive(true);
             }
 
             isOnePerson = !isOnePerson;

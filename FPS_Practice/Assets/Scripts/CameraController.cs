@@ -5,10 +5,9 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     public float mouseSensitivity;
-    private float currentCameraRotationX = 0.0f;
+    private float currentCameraRotationX;
 
-    private float xRotation = 0.0f;
-    private float yRotation = 0.0f;
+    private float xRotation;
 
     void Update()
     {
@@ -25,6 +24,5 @@ public class CameraController : MonoBehaviour
     private void GetInput()
     {
         xRotation = Input.GetAxisRaw("Mouse Y");
-        yRotation = Input.GetAxisRaw("Mouse X");
     }
 }
