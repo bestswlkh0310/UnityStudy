@@ -17,6 +17,13 @@
 # Recordings can get excessive in size
 /[Rr]ecordings/
 
+# Exclude rider idea data
+.idea/
+
+.DS_Store
+
+.DS_Store?
+
 # Uncomment this line if you wish to ignore the asset store tools plugin
 # /[Aa]ssets/AssetStoreTools*
 
