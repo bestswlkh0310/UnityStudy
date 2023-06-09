@@ -6,13 +6,12 @@ public class Inventory : MonoBehaviour
 {
 
     public GameObject slotPrefab;
-    public const int slotCnt = 5;
-    public Slot[] items = new Slot[slotCnt];
-    
+    private const int slotCnt = 5;
+    private GameObject[] slots = new GameObject[slotCnt];
     
     void Start()
     {
-        
+        CreateSlots();
     }
 
     void Update()
@@ -20,18 +19,33 @@ public class Inventory : MonoBehaviour
         
     }
 
-    private void addItem()
+    private void CreateSlots()
     {
-        
+        for (int i = 0; i < slotCnt; i++)
+        {
+            GameObject newSlot = Instantiate(slotPrefab);
+            newSlot.transform.SetParent(gameObject.transform.GetChild(0).transform);
+            slots[i] = newSlot;
+        }
+    }
+    
+    private void addItem(int idx, Item item, int cnt)
+    {
+        if (slots[idx] == null)
+        {
+            slots[idx] = new Slot(item);
+        }
+        else
+        {
+            slots[idx].item.addItem(cnt);
+        }
     }
 
-    private void deleteItem()
+    private void deleteItem(int idx)
     {
-        
-    }
-
-    private void updateItem()
-    {
-        
+        if (slots[idx] != null)
+        {
+            slots[idx] = null;
+        }
     }
 }

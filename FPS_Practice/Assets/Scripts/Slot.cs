@@ -1,18 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class Slot : MonoBehaviour
+internal class Slot: MonoBehaviour
 {
-    
-    void Start()
+    public int idx;
+    public Item item = null;
+
+    public Slot(Item item)
     {
-        
+        this.item = item;
     }
 
-    void Update()
+    public void addItem(int cnt)
     {
-        
+        item.addItem(cnt);
+    }
+
+    public void deleteItem(int cnt)
+    {
+        item.deleteItem(cnt);
     }
 }

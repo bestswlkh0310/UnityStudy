@@ -1,21 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
-
-abstract class Item
+class Item
 {
-    public Image image;
+    public Item() {}
+    public Item(string name, int cnt)
+    {
+        this.name = name;
+        this.cnt = cnt;
+    }
+    
     public string name;
     public int cnt;
 
-    public void addItem()
+    public void addItem(int cnt)
     {
-        cnt++;
+        this.cnt += cnt;
     }
 
-    public void deleteItem()
+    public void deleteItem(int cnt)
     {
-        cnt--;
+        this.cnt -= cnt;
     }
 }
