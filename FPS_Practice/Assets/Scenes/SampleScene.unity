@@ -249,6 +249,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03b546be581cc48ddabcc2e2ed0249b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemManager: {fileID: 1945242911}
   slotPrefab: {fileID: 5449114472014590814, guid: 32f9fcf58cdae43aebc77dc216c12dec, type: 3}
 --- !u!114 &153592376
 MonoBehaviour:
@@ -1210,6 +1211,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d872b24c573a43b582e76982e50d01f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemImage:
+    m_keys:
+    - Bullet
+    m_values:
+    - {fileID: 21300000, guid: 4e105ee043d044368b6705e58a6d2ced, type: 3}
 --- !u!4 &1945242913
 Transform:
   m_ObjectHideFlags: 0

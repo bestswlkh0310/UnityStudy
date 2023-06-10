@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
-
+    public GameObject itemManager;
+    static ItemManager _itemManager;
     public GameObject slotPrefab;
     private const int slotCnt = 5;
     
@@ -15,6 +17,7 @@ public class Inventory : MonoBehaviour
     void Start()
     {
         CreateSlots();
+        _itemManager = itemManager.GetComponent<ItemManager>();
     }
     
     private void CreateSlots()
@@ -45,6 +48,9 @@ public class Inventory : MonoBehaviour
                 items[i].quantity = quantity;
                 // Debug.Log("newItem");
                 SetSlotText(i);
+                Image slotImage = slots[i].transform.Find("SlotItem").gameObject.GetComponent<Image>();
+                slotImage.sprite = _itemManager.itemImage[item.itemName];
+                // Debug.Log(_itemManager.itemImage[item.itemName]);
                 return true;
             }
         }
