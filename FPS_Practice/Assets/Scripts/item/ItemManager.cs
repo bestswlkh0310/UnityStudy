@@ -5,10 +5,7 @@ using UnityEngine;
 public class ItemManager : MonoBehaviour
 {
     private const int itemCnt = 10;
-    public static List<IRotatable> items = new List<IRotatable>();
-    void Start()
-    {
-    }
+    public static List<IRotatable> items = new();
 
     void Update()
     {

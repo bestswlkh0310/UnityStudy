@@ -8,7 +8,7 @@ public class GroundChecker : MonoBehaviour
     {
         if (other.transform.CompareTag("Ground"))
         {
-            PlayerController.isGround = true;
+            PlayerController.IsGround = true;
         }
     }
 }

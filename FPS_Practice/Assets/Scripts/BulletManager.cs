@@ -25,7 +25,7 @@ public class BulletManager : MonoBehaviour
                     Random.Range(-spawnPosRange, spawnPosRange)),
                 bullet.transform.rotation);
             newBullet.name = "Bullet";
-            ItemManager.items.Add(newBullet.GetComponent<Bullet>());
+            ItemManager.items.Add(newBullet.GetComponent<BulletItem>());
             currentTime = 0;
         }
     }

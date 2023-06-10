@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -8,17 +9,17 @@ public class PlayerController : MonoBehaviour
     public GameObject cam;
     public GameObject gui;
     public TextMeshProUGUI itemGetterText;
-    
+
     private Rigidbody rb;
-    
-    private Vector3 ThirdPersonCamOffset;
-    private Vector3 OnePersonCamOffset;
+
+    private Vector3 thirdPersonCamOffset;
+    private Vector3 onePersonCamOffset;
 
     private RaycastHit hit;
     public float itemRayDistance;
     private int itemLayer;
-    
-    public static bool isGround;
+
+    public static bool IsGround;
     private bool isOnePerson;
 
     public float speed;
@@ -27,13 +28,13 @@ public class PlayerController : MonoBehaviour
     private float zInput;
 
     private float yRotation;
-    
-    
+
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        ThirdPersonCamOffset = cam.transform.position - transform.position;
-        OnePersonCamOffset = new Vector3(0.0f, 0.5f, 0.0f);
+        thirdPersonCamOffset = cam.transform.position - transform.position;
+        onePersonCamOffset = new Vector3(0.0f, 0.5f, 0.0f);
         itemLayer = 1 << 3;
     }
 
@@ -50,15 +51,15 @@ public class PlayerController : MonoBehaviour
     private void Move()
     {
         Vector3 move = transform.forward * zInput + transform.right * xInput;
-        
+
         transform.position += move.normalized * speed * Time.deltaTime;
     }
 
     private void Jump()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && isGround)
+        if (Input.GetKeyDown(KeyCode.Space) && IsGround)
         {
-            isGround = false;
+            IsGround = false;
             rb.AddForce(new Vector3(0.0f, 10.0f, 0.0f), ForceMode.Impulse);
         }
     }
@@ -69,12 +70,12 @@ public class PlayerController : MonoBehaviour
         {
             if (isOnePerson)
             {
-                cam.transform.localPosition = ThirdPersonCamOffset;
+                cam.transform.localPosition = thirdPersonCamOffset;
                 gui.SetActive(false);
             }
             else
             {
-                cam.transform.localPosition = OnePersonCamOffset;
+                cam.transform.localPosition = onePersonCamOffset;
                 gui.SetActive(true);
             }
 
@@ -86,15 +87,33 @@ public class PlayerController : MonoBehaviour
     {
         if (Physics.Raycast(transform.position, transform.forward, out hit, itemRayDistance, itemLayer))
         {
-            Debug.Log("hit point : " + hit.point + ", distance : " + hit.distance + ", name : " + hit.collider.name);
-            Debug.DrawRay(transform.position, transform.forward * hit.distance, Color.red);
+            // Debug.Log("hit point : " + hit.point + ", distance : " + hit.distance + ", name : " + hit.collider.name);
+            // Debug.DrawRay(transform.position, transform.forward * hit.distance, Color.red);
             itemGetterText.gameObject.SetActive(true);
             itemGetterText.text = hit.collider.name + " - [F]";
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                GetItem();
+            }
         }
         else
         {
             itemGetterText.gameObject.SetActive(false);
-            Debug.DrawRay(transform.position, transform.forward * 1000f, Color.red);
+            // Debug.DrawRay(transform.position, transform.forward * 1000f, Color.red);
+        }
+    }
+
+    private void GetItem()
+    {
+        Item itemGetted = new Item(hit.collider.name, hit.collider.name, 1, true);
+        bool isAdded = Inventory.AddItem(itemGetted, 1);
+        Debug.Log(isAdded);
+        Debug.Log(Inventory.toString());
+        if (isAdded)
+        {
+            Destroy(hit.collider.gameObject);
+            ItemManager.items.Remove(hit.collider.gameObject.GetComponent<BulletItem>());
+            
         }
     }
 
@@ -109,7 +128,6 @@ public class PlayerController : MonoBehaviour
         zInput = Input.GetAxisRaw("Vertical");
 
         yRotation = Input.GetAxisRaw("Mouse X");
-        
+
     }
 }
-
