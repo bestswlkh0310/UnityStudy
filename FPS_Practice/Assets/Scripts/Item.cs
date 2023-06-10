@@ -1,22 +1,19 @@
-class Item
+using UnityEngine;
+
+public class Item: MonoBehaviour
 {
-    public Item() {}
-    public Item(string name, int cnt)
-    {
-        this.name = name;
-        this.cnt = cnt;
-    }
     
-    public string name;
-    public int cnt;
-
-    public void addItem(int cnt)
+    public string itemName;
+    public string itemType;
+    public int quantity;
+    public bool stackable;
+    
+    public Item() {}
+    public Item(string itemName, string itemType, int quantity, bool stackable)
     {
-        this.cnt += cnt;
-    }
-
-    public void deleteItem(int cnt)
-    {
-        this.cnt -= cnt;
+        this.itemName = itemName;
+        this.itemType = itemType;
+        this.quantity = quantity;
+        this.stackable = stackable;
     }
 }
